@@ -22,6 +22,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 
+import  FileUpload from '@/components/file-upload'
+
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -54,10 +56,9 @@ export default function initialModal() {
 
     const isLoading = false;
 
-    if(!isMounted)
-        return null;
 
-  return (
+
+  return isMounted? (
     <Dialog open>
         <DialogContent className='bg-white text-black p-0 overflow-hidden'>
 
@@ -73,32 +74,45 @@ export default function initialModal() {
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
                     <div className='space-y-8 px-6'>
-                        <div className='flex items-center justify-center text-center'>
-                            TODO: IMAGE UPLOAD
-                        </div>
-                    
 
-                    <FormField 
-                        control = {form.control}
-                        name = "name"
-                        render = {({ field, formState }) => (
-                            <FormItem className="">
-                                <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">Server Name</FormLabel>
-                                <FormControl>
-                                    <Input 
-                                        disabled = {isLoading}
-                                        className = "bg-zinc-300/50 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-black"
-                                        placeholder = "Enter a server name"
-                                        {...field}  
-                                    />
-                                </FormControl>
-                                <FormMessage>{formState.errors?.name?.message}</FormMessage>
-                            </FormItem>
-                        )}  
-                    />
+                        <div className='flex items-center justify-center text-center'>
+                            <FormField
+                                control = {form.control}
+                                name = "imgURL"
+                                render = {({ field, formState }) => (
+                                  <FormItem>
+                                    <FormControl>
+                                        <FileUpload 
+                                            endpoint = {'serverImage'}
+                                            value = {field.value}
+                                            onChange = {field.onChange}
+                                        />
+                                    </FormControl> 
+                                  </FormItem>
+                                )}
+                            />
+                        </div>
+
+                        <FormField 
+                            control = {form.control}
+                            name = "name"
+                            render = {({ field, formState }) => (
+                                <FormItem className="">
+                                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">Server Name</FormLabel>
+                                    <FormControl>
+                                        <Input 
+                                            disabled = {isLoading}
+                                            className = "bg-zinc-300/50 border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-black"
+                                            placeholder = "Enter a server name"
+                                            {...field}  
+                                        />
+                                    </FormControl>
+                                    <FormMessage>{formState.errors?.name?.message}</FormMessage>
+                                </FormItem>
+                            )}  
+                        />
 
                     </div>
-
 
                     <DialogFooter className="bg-gray-100 px-6 py-4">
                             <Button variant="primary" disabled={isLoading}>Create</Button>
@@ -109,5 +123,5 @@ export default function initialModal() {
 
         </DialogContent>
     </Dialog>
-  )
+  ) : null
 }

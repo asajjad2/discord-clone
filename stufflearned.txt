@@ -5,3 +5,4 @@
 -providers/contextAPI
 -react-hook-form
 -hydration-errors 
+-uploadthing, react-dropzone
