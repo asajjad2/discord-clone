@@ -1,6 +1,8 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
 import {
     Dialog,
     DialogContent,
@@ -30,6 +32,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 export default function initialModal() {
 
+    const router = useRouter()
+
     const [isMounted, setIsMounted] = useState(false)
     useEffect(() => setIsMounted(true), [])
 
@@ -51,7 +55,16 @@ export default function initialModal() {
     })
 
     const onSubmit = (data) => {
-        console.log(data);
+        try {
+            axios.post("/api/server", data)
+            
+            form.reset()
+            router.reload()
+            window.location.reload()
+
+        } catch (error){
+            console.log(error)
+        }
     }
 
     const isLoading = false;

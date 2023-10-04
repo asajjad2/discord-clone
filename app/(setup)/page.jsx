@@ -4,7 +4,7 @@ import db from '@/lib/db'
 
 import InitialModal from '@/components/modals/initial-modal'
 
-import { Redirect } from 'next'
+import { redirect } from 'next/navigation'
 
 const Setup = async () => {
 
@@ -20,7 +20,8 @@ const Setup = async () => {
     });
 
     if(Server)
-        return <Redirect to={`/servers/${Server.id}`} /> 
+        return redirect(`/servers/${Server.id}`);
+
 
 
     return (

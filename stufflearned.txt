@@ -6,3 +6,4 @@
 -react-hook-form
 -hydration-errors 
 -uploadthing, react-dropzone
+-uuid
