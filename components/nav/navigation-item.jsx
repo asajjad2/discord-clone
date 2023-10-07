@@ -25,7 +25,7 @@ export default function NavigationItem({id, imgURL, name}) {
                 params?.serverID === id ? "h-9" : "h-2" 
             )}/>
             <div className={cn(
-                "relative group flex mx-3 h-12 w-12 group-hover:rounded-2xl transition-all overflow-hidden",
+                "relative group flex mx-3 h-12 w-12 group-hover:rounded-2xl transition-all overflow-hidden rounded-full",
                 params?.serverID === id && "bg-primary/10 text-primary rounded-2xl"
             )}>
                 <Image 
