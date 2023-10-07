@@ -20,7 +20,7 @@ const Setup = async () => {
     });
 
     if(Server)
-        return redirect(`/servers/${Server.id}`);
+        return redirect(`/server/${Server.id}`);
 
 
 
