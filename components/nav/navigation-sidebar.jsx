@@ -18,11 +18,13 @@ export default async function NavigationSideBar() {
         return redirect('/')
     }
 
+    // console.log('currentProfile:',p)
+
     const servers = await db.server.findMany({
         where: {
             members: {
                 some: {
-                    profileID: currentProfile.id
+                    profileID: profile.id
                 }
             }
         }
